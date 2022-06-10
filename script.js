@@ -5,15 +5,24 @@ speechBtn = document.querySelector(".speech"),
 copyBtn = document.querySelector(".copy"),
 twitterBtn = document.querySelector(".twitter"),
 synth = speechSynthesis;
+var count = 0;
 
 function randomQuote(){
+    
     quoteBtn.classList.add("loading");
     quoteBtn.innerText = "Loading Quote...";
     fetch("https://type.fit/api/quotes").then(response => response.json()).then(result => {
-        quoteText.innerText = result.content;
-        authorName.innerText = result.author;
+        console.log(result);
+
+        quoteText.innerText = result[count].text;
+        console.log(result[count].text);
+        
+
+        //console.log(result.content);
+        authorName.innerText = result[count].author;
         quoteBtn.classList.remove("loading");
         quoteBtn.innerText = "New Quote";
+        count=count+1;
     });
 }
 
